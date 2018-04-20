@@ -9,10 +9,11 @@ router.post('/', function (req, res){
     .then(
         function(user){
             if(user){
-                console.log(user)
-                bcrypt.compare(req.body.user.password, user.passwordhash, function(err, matches){
+                bcrypt.compare(req.body.user.password, user.password, function(err, matches){
                     if(matches){
+
                         var token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn:60*60*24});
+                        console.log(token)
                         res.json({
                             user: user,
                             message: "Logged in successfully",
