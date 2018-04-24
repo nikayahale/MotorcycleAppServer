@@ -7,6 +7,7 @@ require('dotenv').config();
 app.use(bodyParser.json());
 sequelize.sync();
 app.use(require('./middleware/headers'));
+app.use(require('./middleware/validation'));
 app.listen(3000, () => {
     console.log('App is listening on 3000')
 });

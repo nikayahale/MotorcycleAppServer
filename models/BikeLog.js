@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes){
         bike: DataTypes.STRING,
         mileage: DataTypes.INTEGER,
         gas: DataTypes.STRING,
-        maintenance: DataTypes.STRING
+        maintenance: DataTypes.STRING,
+        owner: DataTypes.INTEGER
     })
     return BikeLog;
 }

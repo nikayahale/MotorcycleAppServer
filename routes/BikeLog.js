@@ -8,19 +8,29 @@ router.post('/', function (req, res){
         bike: req.body.BikeLog.bike,
         mileage: req.body.BikeLog.mileage,
         gas: req.body.BikeLog.gas,
-        maintenance: req.body.BikeLog.maintenance
+        maintenance: req.body.BikeLog.maintenance,
+        owner: req.user.id
     })
-    res.send('You coded correctly')
+    .then(
+        function createSuccess(log){
+            res.json({
+                bikelog: log,
+                message: "it worked"
+            })
+        }
+    )
 })
 
 router.get('/', function (req, res){
     var userid = req.user.id;
+    console.log(userid)
     BikeLog.findAll({ where: {owner: userid}})
     .then(
         function findAllSuccess(data){
             res.json(data)
         },
         function findAllError(err){
+            console.log('SHOW AN ERROR')
             res.send(500, err.message)
         }
     )
